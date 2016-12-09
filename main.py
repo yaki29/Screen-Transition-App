@@ -11,7 +11,7 @@ from kivy.animation import AnimationTransition
 Builder.load_string(
 '''
 <TransitionWidget>:
-	border: '25dp'
+	border: '0dp'
 	page: 1
     Button:
         
@@ -26,7 +26,7 @@ Builder.load_string(
         		height: '60dp'
         		width: '60dp'
         		on_press: root.page = 1
-        		background_color: 0, 255, 0, 1
+        		background_color: 0, 0.99, 0.59, 1
         		BoxLayout:
         			size: self.parent.size
         			pos: self.parent.pos
@@ -43,12 +43,13 @@ Builder.load_string(
 			size_hint: None, None
 			height: '50dp'
 			width: '50dp'
+			background_color: 0, 0.99, 0 ,1
 		Label:
 			id: head
 			text: 'This is to animate'
 			font_size: 40
 			size_hint_y: None
-			height: '60dp'
+			height: '20dp'
 			# pos_hint_x: None
 			# pos_hint_y: None
 			markup: True
@@ -65,7 +66,7 @@ Builder.load_string(
 		        size_hint_y: None
 		        height: self.texture_size[1]
 		        # on_scroll_start: root.anime()
-		        # background_color: 255, 0, 0, 1
+		        # background_color: 1, 0, 0, 1
 		        AnchorLayout:
 		        	size: self.parent.size
 		        	pos: self.parent.pos
@@ -77,7 +78,7 @@ Builder.load_string(
 		        		height: '60dp'
 		        		width: '60dp'
 		        		on_press: root.page = 0
-		        		background_color: 0, 255, 0, 1
+		        		background_color: 0, 0.99, 0.59, 1
 		        		BoxLayout:
 		        			size: self.parent.size
 		        			pos: self.parent.pos
@@ -92,7 +93,7 @@ Builder.load_string(
 class TransitionWidget(PageLayout):
 	def anime(self):
 		lab = self.ids['head']
-		ani = Animation(pos=(500,800), size=(10, 10), t = 'linear',duration=0.5)
+		ani = Animation(pos=(500,800), size=(60, 60), t = 'out_bounce',duration=0.5)
 		ani.start(lab)
 class ScreenApp(App):
 
