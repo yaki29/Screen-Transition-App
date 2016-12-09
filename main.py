@@ -38,7 +38,7 @@ Builder.load_string(
 		id: second_layout
 		orientation: 'vertical'
 		Button:
-			text: 'click'
+			text: 'anime'
 			on_press: root.anime()
 			size_hint: None, None
 			height: '50dp'
@@ -49,11 +49,11 @@ Builder.load_string(
 			font_size: 40
 			size_hint_y: None
 			height: '60dp'
-			pos_hint_x: None
-			pos_hint_y: None
+			# pos_hint_x: None
+			# pos_hint_y: None
 			markup: True
 			halign: 'left'
-			valign: 'middle'
+			valign: 'top'
 
 		ScrollView:
 			bar_color: 1, 0 , 0, 1
@@ -64,7 +64,7 @@ Builder.load_string(
 		        text_size: self.width, None
 		        size_hint_y: None
 		        height: self.texture_size[1]
-		        # on_scroll_start: cross.background_color = (1,0,0,00.5)
+		        # on_scroll_start: root.anime()
 		        # background_color: 255, 0, 0, 1
 		        AnchorLayout:
 		        	size: self.parent.size
