@@ -65,7 +65,8 @@ Builder.load_string(
 		        text_size: self.width, None
 		        size_hint_y: None
 		        height: self.texture_size[1]
-		        # on_scroll_start: root.anime()
+		        # onscroll_stop: root.anime()
+		        onscroll_start: root.anime()
 		        # background_color: 1, 0, 0, 1
 		        AnchorLayout:
 		        	size: self.parent.size
