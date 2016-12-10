@@ -93,7 +93,7 @@ Builder.load_string(
 class TransitionWidget(PageLayout):
 	def anime(self):
 		lab = self.ids['head']
-		ani = Animation(pos=(-150,800), size=(60, 60), t = 'out_bounce',duration=0.5) + Animation(pos=(-230,480), t = 'linear',duration=1)
+		ani = Animation(pos=(-150,500), size=(60, 60), t = 'out_bounce',duration=0.5) + Animation(pos=(-230,480), t = 'linear',duration=1)
 		ani.start(lab)
 class ScreenApp(App):
 
