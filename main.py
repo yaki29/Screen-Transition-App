@@ -59,14 +59,15 @@ Builder.load_string(
 		ScrollView:
 			bar_color: 1, 0 , 0, 1
 			bar_width: 4
+			on_scroll_start: root.anime(root.page)
 			Label:
 		        text: 'my name is Yash '*100
 		        font_size: 50
 		        text_size: self.width, None
 		        size_hint_y: None
 		        height: self.texture_size[1]
-		        # onscroll_stop: root.anime()
-		        onscroll_start: root.anime()
+		        
+		        
 		        # background_color: 1, 0, 0, 1
 		        AnchorLayout:
 		        	size: self.parent.size
@@ -92,10 +93,14 @@ Builder.load_string(
 ''')
 
 class TransitionWidget(PageLayout):
-	def anime(self):
-		lab = self.ids['head']
-		ani = Animation(pos=(-150,500), size=(60, 60), t = 'out_bounce',duration=0.5) + Animation(pos=(-230,480), t = 'linear',duration=1)
-		ani.start(lab)
+	def anime(self,page):
+		flag = 0
+		print page 
+		if flag == 0 and page == 1:
+			lab = self.ids['head']
+			ani = Animation(pos=(-150,500), size=(60, 60), t = 'out_bounce',duration=0.5) + Animation(pos=(-230,480), t = 'linear',duration=1)
+			ani.start(lab)
+			flag = 1
 class ScreenApp(App):
 
 	def build(self):
