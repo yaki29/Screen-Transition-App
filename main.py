@@ -37,13 +37,13 @@ Builder.load_string(
 	BoxLayout:
 		id: second_layout
 		orientation: 'vertical'
-		Button:
-			text: 'anime'
-			on_press: root.anime()
-			size_hint: None, None
-			height: '50dp'
-			width: '50dp'
-			background_color: 0, 0.99, 0 ,1
+		# Button:
+		# 	text: 'anime'
+		# 	on_press: root.anime()
+		# 	size_hint: None, None
+		# 	height: '50dp'
+		# 	width: '50dp'
+		# 	background_color: 0, 0.99, 0 ,1
 		Label:
 			id: head
 			text: 'This is to animate'
@@ -95,10 +95,10 @@ Builder.load_string(
 class TransitionWidget(PageLayout):
 	def anime(self,page):
 		flag = 0
-		print page 
+		
 		if flag == 0 and page == 1:
 			lab = self.ids['head']
-			ani = Animation(pos=(-150,500), size=(60, 60), t = 'out_bounce',duration=0.5) + Animation(pos=(-230,480), t = 'linear',duration=1)
+			ani = Animation(pos=(-self.width*0.05,self.height*0.93), size=(70, 70), t = 'out_bounce',duration=0.5) + Animation(pos=(-self.width*0.30,self.height*0.905), t = 'linear',duration=1)
 			ani.start(lab)
 			flag = 1
 class ScreenApp(App):
