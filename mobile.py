@@ -8,13 +8,13 @@ from kivy.uix.scrollview import ScrollView
 from kivy.app import App
 from kivy.animation import Animation
 from kivy.animation import AnimationTransition
+from kivy.uix.screenmanager import Screen, ScreenManager, SlideTransition
 Builder.load_string(
 '''
 <TransitionWidget>:
-	border: '0dp'
-	page: 1
+
     Button:
-        
+        text: 'StartPage'
         background_color: 1, 1, 1, 0
         AnchorLayout:
         	size: self.parent.size
@@ -23,17 +23,12 @@ Builder.load_string(
         	anchor_y: 'top'
         	Button:
         		size_hint: None, None
+        		text: "next"
         		height: '60dp'
         		width: '60dp'
-        		on_press: root.page = 1
+        		on_press: root.manager.current = 'second'
         		background_color: 0, 0.99, 0.59, 1
-        		BoxLayout:
-        			size: self.parent.size
-        			pos: self.parent.pos
-		        	Image: 
-		        		source: 'next.png'
-		        		pos: self.pos
-		        		size: self.size
+<SecondPage>:	
 	BoxLayout:
 		id: second_layout
 		orientation: 'vertical'
@@ -59,7 +54,7 @@ Builder.load_string(
 		ScrollView:
 			bar_color: 1, 0 , 0, 1
 			bar_width: 4
-			on_scroll_start: root.anime(root.page)
+			on_scroll_start: root.anime()
 			Label:
 		        text: 'my name is Yash '*100
 		        font_size: 50
@@ -76,33 +71,37 @@ Builder.load_string(
 		        	anchor_y: 'top'
 		        	Button:
 		        		id: cross
+		        		text: "back"
 		        		size_hint: None, None
 		        		height: '60dp'
 		        		width: '60dp'
-		        		on_press: root.page = 0
+		        		on_press: root.manager.current = 'start'
+		        		on_press: root.change_base()
 		        		background_color: 0, 0.99, 0.59, 1
-		        		BoxLayout:
-		        			size: self.parent.size
-		        			pos: self.parent.pos
-				        	Image: 
-				        		source: 'cross.png'
-				        		pos: self.pos
-				        		size: self.size
-
 
 ''')
 
-class TransitionWidget(PageLayout):
-	def anime(self,page):
-		flag = 0
-		
-		if flag == 0 and page == 1:
+class TransitionWidget(Screen):
+	pass
+
+class SecondPage(Screen):
+	def anime(self): 
+		if flag == 0:
 			lab = self.ids['head']
 			ani = Animation(pos=(-self.width*0.05,self.height*0.93), size=(70, 70), t = 'out_bounce',duration=0.5) + Animation(pos=(-self.width*0.30,self.height*0.905), t = 'linear',duration=1)
 			ani.start(lab)
-			flag = 1
+			global flag
+			flag += 1
+	def change_base(self):
+		global flag
+		flag = 0
+sm = ScreenManager(transition=SlideTransition(direction='up'))
+sm.add_widget(TransitionWidget(name='start'))
+sm.add_widget(SecondPage(name='second'))
+global flag 
+flag = 0
 class ScreenApp(App):
-
+	
 	def build(self):
-		return	TransitionWidget()
+		return	sm
 ScreenApp().run()
