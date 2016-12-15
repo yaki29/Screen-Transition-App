@@ -54,7 +54,9 @@ Builder.load_string(
 		ScrollView:
 			bar_color: 1, 0 , 0, 1
 			bar_width: 4
-			on_scroll_start: root.anime()
+			scroll_y: 1
+			on_scroll_start: root.decide(self.scroll_y)
+			# on_scroll_start: root.animeup()
 			Label:
 		        text: 'my name is Yash '*100
 		        font_size: 50
@@ -85,13 +87,28 @@ class TransitionWidget(Screen):
 	pass
 
 class SecondPage(Screen):
-	def anime(self): 
-		if flag == 0:
-			lab = self.ids['head']
-			ani = Animation(pos=(-self.width*0.05,self.height*0.93), size=(70, 70), t = 'out_bounce',duration=0.5) + Animation(pos=(-self.width*0.30,self.height*0.905), t = 'linear',duration=1)
-			ani.start(lab)
-			global flag
-			flag += 1
+	def decide(self,sy):
+		global previous
+		if sy > previous:
+			self.animeup()
+		else :
+			self.animedown()
+		global previous
+		previous = sy 
+	def animedown(self): 
+		# if flag == 0:
+		lab = self.ids['head']
+		ani = Animation(pos=(-self.width*0.05,self.height*0.93), size=(70, 70), t = 'out_bounce',duration=0.5) + Animation(pos=(-self.width*0.30,self.height*0.905), t = 'linear',duration=1)
+		ani.start(lab)
+			# global flag
+			# flag += 1
+	def animeup(self): 
+		# if flag == 0:
+		lab = self.ids['head']
+		ani = Animation(pos=(-self.width*0.30,self.height*0.905), size=(70,70),duration=0.5) + Animation(pos=(-self.width*0.05,self.height*0.93), t = 'linear',duration=1)
+		ani.start(lab)
+			# global flag
+			# flag += 1
 	def change_base(self):
 		global flag
 		flag = 0
@@ -100,6 +117,9 @@ sm.add_widget(TransitionWidget(name='start'))
 sm.add_widget(SecondPage(name='second'))
 global flag 
 flag = 0
+global previous 
+previous = -1
+
 class ScreenApp(App):
 	
 	def build(self):
