@@ -46,7 +46,7 @@ Builder.load_string(
 			font_size: 40
 			# pos_hint_x: None
 			# pos_hint_y: None
-			pos: - self.parent.width*0.30 + scroller.scroll_y * 150,self.parent.height*0.86 + scroller.scroll_y * 50
+			# pos: - self.parent.width*0.30 + scroller.scroll_y * 150,self.parent.height*0.86 + scroller.scroll_y * 50
 			size_hint_y: None
 			height: '110dp'
 			halign: 'left'
