@@ -39,26 +39,25 @@ Builder.load_string(
 		# 	height: '50dp'
 		# 	width: '50dp'
 		# 	background_color: 0, 0.99, 0 ,1
+
 		Label:
 			id: head
 			text: 'This is to animate'
 			font_size: 40
 			size_hint_y: None
-			height: '20dp'
-			# pos_hint_x: None
-			# pos_hint_y: None
-			markup: True
+			height: '110dp'
 			halign: 'left'
 			valign: 'top'
 
 		ScrollView:
+			id: scroller
 			bar_color: 1, 0 , 0, 1
 			bar_width: 4
 			scroll_y: 1
-			on_scroll_start: root.decide(self.scroll_y)
+			on_scroll_start: root.animeup(self.scroll_y)
 			# on_scroll_start: root.animeup()
 			Label:
-		        text: 'my name is Yash '*100
+		        text: 'my name is Yash '*40
 		        font_size: 50
 		        text_size: self.width, None
 		        size_hint_y: None
@@ -87,26 +86,30 @@ class TransitionWidget(Screen):
 	pass
 
 class SecondPage(Screen):
-	def decide(self,sy):
-		global previous
-		if sy > previous:
-			self.animeup()
-		else :
-			self.animedown()
-		global previous
-		previous = sy 
-	def animedown(self): 
-		# if flag == 0:
-		lab = self.ids['head']
-		ani = Animation(pos=(-self.width*0.05,self.height*0.93), size=(70, 70), t = 'out_bounce',duration=0.5) + Animation(pos=(-self.width*0.30,self.height*0.905), t = 'linear',duration=1)
-		ani.start(lab)
+	# def decide(self,sy):
+	# 	global previous
+	# 	if sy > previous:
+	# 		self.animeup()
+	# 	else :
+	# 		self.animedown()
+	# 	global previous
+	# 	previous = sy 
+	# def animedown(self): 
+	# 	# if flag == 0:
+	# 	lab = self.ids['head']
+	# 	ani = Animation(pos=(-self.width*0.05,self.height*0.93), size=(70, 70), t = 'out_bounce',duration=0.5) + Animation(pos=(-self.width*0.30,self.height*0.905), t = 'linear',duration=1)
+	# 	ani.start(lab)
 			# global flag
 			# flag += 1
-	def animeup(self): 
+	def animeup(self,sy): 
 		# if flag == 0:
+		scr = self.ids['scroller']
 		lab = self.ids['head']
-		ani = Animation(pos=(-self.width*0.30,self.height*0.905), size=(70,70),duration=0.5) + Animation(pos=(-self.width*0.05,self.height*0.93), t = 'linear',duration=1)
-		ani.start(lab)
+		lab.pos[1] =  450 + scr.scroll_y * 50
+		lab.pos[0] =  -230 + 10*(7.73**scr.scroll_y)
+		print scr.scroll_y
+		# ani = Animation(pos=(-self.width*0.30,self.height*0.905), size=(70,70),duration=0.5) + Animation(pos=(-self.width*0.05,self.height*0.93), t = 'linear',duration=1)
+		# ani.start(lab)
 			# global flag
 			# flag += 1
 	def change_base(self):
