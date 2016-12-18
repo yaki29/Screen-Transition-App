@@ -1,2 +1,3 @@
-# Screen-Transition-App
-It's a Screen Transition Kivy Application that uses pop ups to transit between screens
+##Scroll Animation
+
+This animation is generally used by most of the developers either in android apps or in web apps. 
