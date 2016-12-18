@@ -47,8 +47,10 @@ Builder.load_string(
 			# pos_hint_x: None
 			# pos_hint_y: None
 			# pos: - self.parent.width*0.30 + scroller.scroll_y * 150,self.parent.height*0.86 + scroller.scroll_y * 50
+			width: self.texture_size[0]
+			height: self.texture_size[1]
 			size_hint_y: None
-			height: '110dp'
+			# height: '110dp'
 			halign: 'left'
 			valign: 'top'
 
@@ -110,7 +112,7 @@ class SecondPage(Screen):
 		scr = self.ids['scroller']
 		lab = self.ids['head']
 
-		lab.pos[1] =  lab.parent.height*0.86 + scr.scroll_y * 50
+		lab.pos[1] =  lab.parent.height*0.88 + scr.scroll_y * 48
 		lab.pos[0] =  - lab.parent.width*0.30 + scr.scroll_y * 150
 		print scr.scroll_y
 		# ani = Animation(pos=(-self.width*0.30,self.height*0.905), size=(70,70),duration=0.5) + Animation(pos=(-self.width*0.05,self.height*0.93), t = 'linear',duration=1)
