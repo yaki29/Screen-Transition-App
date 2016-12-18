@@ -39,20 +39,22 @@ Builder.load_string(
 			height: '50dp'
 			width: '50dp'
 			background_color: 0, 0.99, 0 ,1
-
-		Label:
-			id: head
-			text: 'This is to animate'
-			font_size: 40
-			# pos_hint_x: None
-			# pos_hint_y: None
-			# pos: - self.parent.width*0.30 + scroller.scroll_y * 150,self.parent.height*0.86 + scroller.scroll_y * 50
-			width: self.texture_size[0]
-			height: self.texture_size[1]
+		BoxLayout:
 			size_hint_y: None
-			# height: '110dp'
-			halign: 'left'
-			valign: 'top'
+			Label:
+				id: head
+				text: 'This is to animate'
+				font_size: 40
+				pos_hint_x: None
+				pos_hint_y: None
+				pos: (-90, 558)
+				# pos: - self.parent.width*0.30 + scroller.scroll_y * 150,self.parent.height*0.86 + scroller.scroll_y * 50
+				width: self.texture_size[0]
+				height: self.texture_size[1]
+				size_hint_y: None
+				# height: '110dp'
+				halign: 'left'
+				valign: 'top'
 
 
 		ScrollView:
@@ -112,8 +114,9 @@ class SecondPage(Screen):
 		scr = self.ids['scroller']
 		lab = self.ids['head']
 
-		lab.pos[1] =  lab.parent.height*0.88 + scr.scroll_y * 48
-		lab.pos[0] =  - lab.parent.width*0.30 + scr.scroll_y * 150
+		lab.pos[1] =  lab.parent.parent.height*0.85 + scr.scroll_y * 48
+		lab.pos[0] =  - lab.parent.parent.width*0.30 + scr.scroll_y * 150
+		print lab.pos[1], lab.pos[0]
 		print scr.scroll_y
 		# ani = Animation(pos=(-self.width*0.30,self.height*0.905), size=(70,70),duration=0.5) + Animation(pos=(-self.width*0.05,self.height*0.93), t = 'linear',duration=1)
 		# ani.start(lab)
