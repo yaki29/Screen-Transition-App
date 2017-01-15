@@ -7,31 +7,44 @@ from kivy.app import App
 from kivy.uix.screenmanager import Screen, ScreenManager, SlideTransition
 Builder.load_string(
 '''
-<TransitionWidget>:
+# <TransitionWidget>:
 
-    Button:
-        text: 'StartPage'
-        background_color: 1, 1, 1, 0
-        AnchorLayout:
-        	size: self.parent.size
-        	pos: self.parent.pos
-        	anchor_x: 'right'
-        	anchor_y: 'top'
-        	Button:
-        		size_hint: None, None
-        		text: "next"
-        		height: '60dp'
-        		width: '60dp'
-        		on_press: root.manager.current = 'second'
-        		background_color: 0, 0.99, 0 ,1
+#     Button:
+#         text: 'StartPage'
+#         background_color: 1, 1, 1, 0
+#         AnchorLayout:
+#         	size: self.parent.size
+#         	pos: self.parent.pos
+#         	anchor_x: 'right'
+#         	anchor_y: 'top'
+#         	Button:
+#         		size_hint: None, None
+#         		text: "next"
+#         		height: '60dp'
+#         		width: '60dp'
+#         		on_press: root.manager.current = 'second'
+#         		background_color: 0, 0.99, 0 ,1
     		
-<SecondPage>:	
+<SecondPage>:
+	spacing: 20
+	canvas.before: 
+		Color: 
+			rgba: 1,0,0,1
+		Rectangle: 
+			pos: self.pos
+			size: self.size	
 	BoxLayout:
 		id: second_layout
 		orientation: 'vertical'
+		canvas.before:
+            Color:
+                rgba: 0.398,.310,.562,1
+            Rectangle:
+                pos: self.pos
+                size: self.size
 		Button:
 			text: 'Back'
-			on_press: root.manager.current = 'start'
+			# on_press: root.manager.current = 'start'
 			size_hint: None, None
 			height: '50dp'
 			width: '50dp'
@@ -51,45 +64,51 @@ Builder.load_string(
 				halign: 'left'
 				valign: 'top'
         		
-        
+        BoxLayout:
+	        canvas.before:
+	            Color:
+	                rgba: 0,0,0.501,1
+	            Rectangle:
+	                pos: self.pos
+	                size: self.size
 
-		ScrollView:
-			id: scroller
-			bar_color: 1, 0 , 0, 1
-			bar_width: 4
-			scroll_y: 1
-			on_scroll_start: root.animeup(self.scroll_y)
-			Label:
-		        text: 'my name is Yash '*100
-		        font_size: 50
-		        text_size: self.width, None
-		        size_hint_y: None
-		        height: self.texture_size[1]
-		        
-		        
+			ScrollView:
+				id: scroller
+				bar_color: 1, 0 , 0, 1
+				bar_width: 4
+				scroll_y: 1
+				on_scroll_start: root.animeup(self.scroll_y)
+				Label:
+			        text: 'my name is Yash '*100
+			        font_size: 50
+			        text_size: self.width, None
+			        size_hint_y: None
+			        height: self.texture_size[1]
+			        
+			        
 
 ''')
 
 class TransitionWidget(Screen):
 	pass
 
-class SecondPage(Screen):
+class SecondPage(BoxLayout):
 	def animeup(self,sy): 
 		scr = self.ids['scroller']
 		lab = self.ids['head']
-		# lab.font_size = 50  - scr.scroll_y*10
+		lab.font_size = 50  - scr.scroll_y*10
 		lab.pos[1] =  lab.parent.parent.height*0.85 + scr.scroll_y * 48
 		lab.pos[0] =  - lab.parent.parent.width*0.30 + scr.scroll_y * 150
 		
 		print lab.pos[1], lab.pos[0]
 		print scr.scroll_y
 
-sm = ScreenManager(transition=SlideTransition(direction='up'))
-sm.add_widget(TransitionWidget(name='start'))
-sm.add_widget(SecondPage(name='second'))
+# sm = ScreenManager(transition=SlideTransition(direction='up'))
+# sm.add_widget(TransitionWidget(name='start'))
+# sm.add_widget(SecondPage(name='second'))
 
 
 class ScreenApp(App):
 	def build(self):
-		return	sm
+		return	SecondPage()
 ScreenApp().run()
